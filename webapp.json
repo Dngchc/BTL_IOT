@@ -1,0 +1,1104 @@
+[
+    {
+        "id": "fddb6381c9a394b4",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a862292dd6880ef4",
+        "type": "mqtt in",
+        "z": "fddb6381c9a394b4",
+        "name": "Data",
+        "topic": "BTL/Data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "592d3a4c077eb0c6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 120,
+        "wires": [
+            [
+                "7754fba2e5ac7253",
+                "adf3a9109e48384b"
+            ]
+        ]
+    },
+    {
+        "id": "7754fba2e5ac7253",
+        "type": "ui_chart",
+        "z": "fddb6381c9a394b4",
+        "name": "",
+        "group": "7eba60b3f97ca446",
+        "order": 2,
+        "width": 6,
+        "height": 5,
+        "label": "Biểu Đồ",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "30",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 360,
+        "y": 260,
+        "wires": [
+            [
+                "b2bf90bcb3b98958"
+            ]
+        ]
+    },
+    {
+        "id": "adf3a9109e48384b",
+        "type": "switch",
+        "z": "fddb6381c9a394b4",
+        "name": "check",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "warning",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "warning",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "25",
+                "vt": "num"
+            },
+            {
+                "t": "gte",
+                "v": "25",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 350,
+        "y": 60,
+        "wires": [
+            [
+                "a2ca264030c60bcb",
+                "7001c16a9464b21c"
+            ],
+            [
+                "0b13f2271de62462"
+            ],
+            [
+                "fae931c41df7f0a1"
+            ],
+            [
+                "fae931c41df7f0a1"
+            ]
+        ]
+    },
+    {
+        "id": "05988b08e7862770",
+        "type": "ui_button",
+        "z": "fddb6381c9a394b4",
+        "name": "Turn On",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 18,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "on",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 160,
+        "y": 560,
+        "wires": [
+            [
+                "0bd423f85a96ccec",
+                "ca59cb9bb6804e2a",
+                "7c824a7b1bfd4b59"
+            ]
+        ]
+    },
+    {
+        "id": "7b674db74d8d408a",
+        "type": "ui_button",
+        "z": "fddb6381c9a394b4",
+        "name": "Turn Off",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 19,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "off",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 160,
+        "y": 660,
+        "wires": [
+            [
+                "0bd423f85a96ccec",
+                "ca59cb9bb6804e2a",
+                "7c824a7b1bfd4b59"
+            ]
+        ]
+    },
+    {
+        "id": "0bd423f85a96ccec",
+        "type": "mqtt out",
+        "z": "fddb6381c9a394b4",
+        "name": "",
+        "topic": "BTL/Control",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d651a65f.c0a2d",
+        "x": 450,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "ca59cb9bb6804e2a",
+        "type": "switch",
+        "z": "fddb6381c9a394b4",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 660,
+        "wires": [
+            [
+                "3ecc6d357f280962",
+                "76a92b0c4e4a930b"
+            ],
+            [
+                "3ecc6d357f280962",
+                "76a92b0c4e4a930b"
+            ]
+        ]
+    },
+    {
+        "id": "3ecc6d357f280962",
+        "type": "function",
+        "z": "fddb6381c9a394b4",
+        "name": "function 1",
+        "func": "// Lấy giá trị từ ui_switch\nvar switchValue = msg.payload;\n\n// Định nghĩa trạng thái tiếng Việt\nvar vietnameseStatus = switchValue === 'on' ? 'Bật' : 'Tắt';\n\n// Gửi giá trị tiếng Việt đến ui_text\nmsg.payload =  vietnameseStatus;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 660,
+        "wires": [
+            [
+                "5f0feb5bd8dd8644"
+            ]
+        ]
+    },
+    {
+        "id": "5f0feb5bd8dd8644",
+        "type": "ui_text",
+        "z": "fddb6381c9a394b4",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 5,
+        "width": 6,
+        "height": 2,
+        "name": "",
+        "label": "Trạng Thái Đèn: ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 880,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "a2ca264030c60bcb",
+        "type": "function",
+        "z": "fddb6381c9a394b4",
+        "name": "function 2",
+        "func": "msg.payload = \"Nguy Hiểm !!!!!\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 40,
+        "wires": [
+            [
+                "b2eefb6185c3bafb"
+            ]
+        ]
+    },
+    {
+        "id": "b2eefb6185c3bafb",
+        "type": "ui_toast",
+        "z": "fddb6381c9a394b4",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": true,
+        "className": "",
+        "topic": "Cảnh Báo",
+        "name": "Hiển thị thông báo",
+        "x": 930,
+        "y": 40,
+        "wires": [
+            [
+                "1de89d2ad1101016"
+            ]
+        ]
+    },
+    {
+        "id": "a69ffa0c3ad7d1de",
+        "type": "mqtt in",
+        "z": "fddb6381c9a394b4",
+        "name": "",
+        "topic": "BTL/Control",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "592d3a4c077eb0c6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 480,
+        "wires": [
+            [
+                "ca59cb9bb6804e2a"
+            ]
+        ]
+    },
+    {
+        "id": "1de89d2ad1101016",
+        "type": "debug",
+        "z": "fddb6381c9a394b4",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "76a92b0c4e4a930b",
+        "type": "ui_template",
+        "z": "fddb6381c9a394b4",
+        "group": "cf068d0bbf0ea0ae",
+        "name": "demo đèn",
+        "order": 10,
+        "width": 3,
+        "height": 3,
+        "format": "<div\n    style=\"width: 100px; height: 100px; border-radius: 50%; background-color: {{msg.payload === 'on' ? '#00ff00' : '#ff0000'}}; display: flex; justify-content: center; align-items: center;\">\n    <!-- Nội dung của bạn ở đây -->\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 640,
+        "y": 780,
+        "wires": [
+            [
+                "53f620a66cbc6b58"
+            ]
+        ]
+    },
+    {
+        "id": "53f620a66cbc6b58",
+        "type": "debug",
+        "z": "fddb6381c9a394b4",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "b2bf90bcb3b98958",
+        "type": "debug",
+        "z": "fddb6381c9a394b4",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "2fa02cba5e6a284e",
+        "type": "ui_text",
+        "z": "fddb6381c9a394b4",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "Phòng Khách",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 180,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "b709b538855cafbe",
+        "type": "ui_text",
+        "z": "fddb6381c9a394b4",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 23,
+        "width": 6,
+        "height": 2,
+        "name": "",
+        "label": "  ",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 150,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "77512d69b9aff53d",
+        "type": "ui_template",
+        "z": "fddb6381c9a394b4",
+        "group": "cf068d0bbf0ea0ae",
+        "name": "link hỗ trợ",
+        "order": 29,
+        "width": 6,
+        "height": 1,
+        "format": "<style>\n    .centered-link {\n        text-align: center;\n    }\n\n    .centered-link a {\n        display: inline-block;\n        margin: auto;\n        text-align: center;\n        color: black;\n        text-decoration: none;\n        border: 2px solid black;\n        padding: 5px 10px;\n        cursor: pointer;\n        border-radius: 5px;\n        font-size: 14px;\n        /* Đặt kích thước chữ mong muốn */\n    }\n</style>\n\n<div class=\"centered-link\">\n    <a href=\"http://www.fb.com/\" target=\"_blank\">Hỗ Trợ</a>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 360,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0b13f2271de62462",
+        "type": "ui_gauge",
+        "z": "fddb6381c9a394b4",
+        "name": "",
+        "group": "7eba60b3f97ca446",
+        "order": 13,
+        "width": 8,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Giá trị cảm biến",
+        "label": "",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 680,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "a6b348f3e40c7fcd",
+        "type": "ui_text",
+        "z": "fddb6381c9a394b4",
+        "group": "7eba60b3f97ca446",
+        "order": 14,
+        "width": 8,
+        "height": 2,
+        "name": "",
+        "label": "Trạng thái: ",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 950,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "fae931c41df7f0a1",
+        "type": "function",
+        "z": "fddb6381c9a394b4",
+        "name": "function 3",
+        "func": "// Function Node để kiểm tra giá trị gas và thay đổi payload\nif (msg.payload >= 500) {\n    msg.payload = \"Nguy Hiểm!\";\n} else {\n    msg.payload = \"An Toàn\";\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 220,
+        "wires": [
+            [
+                "a6b348f3e40c7fcd"
+            ]
+        ]
+    },
+    {
+        "id": "a9ec3bbdd25f438d",
+        "type": "ui_template",
+        "z": "fddb6381c9a394b4",
+        "group": "7eba60b3f97ca446",
+        "name": "",
+        "order": 16,
+        "width": 8,
+        "height": 1,
+        "format": "<style>\n    .custom-button {\n        display: inline-block;\n        padding: 8px 16px;\n        font-size: 16px;\n        text-align: center;\n        cursor: pointer;\n        border: 2px solid #3498db;\n        border-radius: 5px;\n        color: #fff;\n        background-color: #3498db;\n        text-decoration: none;\n        width: 40%;\n        margin: 0 auto;\n    }\n\n    .custom-button:hover {\n        background-color: #2077b3;\n    }\n\n    .custom-button a {\n        text-decoration: none;\n        color: inherit;\n    }\n</style>\n\n<div class=\"custom-button\" onclick=\"redirectToYouTube()\">\n    <a href=\"http://www.youtube.com/\" target=\"_blank\">SOS</a>\n</div>\n\n<script>\n    function redirectToYouTube() {\n        window.open(\"http://www.youtube.com/\", \"_blank\");\n    }\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 120,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7001c16a9464b21c",
+        "type": "function",
+        "z": "fddb6381c9a394b4",
+        "name": "function 4",
+        "func": "msg.payload = \"Cảnh báo nguy cơ cháy nổ, bạn hãy chú ý!!\";\nmsg.topic = \"Cảnh Báo\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 100,
+        "wires": [
+            [
+                "cb4aeee2382baa24",
+                "0c7e1d353077d677"
+            ]
+        ]
+    },
+    {
+        "id": "cb4aeee2382baa24",
+        "type": "ui_audio",
+        "z": "fddb6381c9a394b4",
+        "name": "Âm thanh thông báo",
+        "group": "7eba60b3f97ca446",
+        "voice": "Microsoft An - Vietnamese (Vietnam)",
+        "always": true,
+        "x": 980,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "7c824a7b1bfd4b59",
+        "type": "function",
+        "z": "fddb6381c9a394b4",
+        "name": "function 5",
+        "func": "if (msg.payload == 'on') {\n    msg.payload = \" đã bật đèn\";\n} else if ( msg.payload == 'off') {\n    msg.payload = \"đã tắt đèn\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 480,
+        "wires": [
+            [
+                "9ecc05b8555bec29"
+            ]
+        ]
+    },
+    {
+        "id": "9ecc05b8555bec29",
+        "type": "ui_audio",
+        "z": "fddb6381c9a394b4",
+        "name": "",
+        "group": "cf068d0bbf0ea0ae",
+        "voice": "Microsoft HoaiMy Online (Natural) - Vietnamese (Vietnam)",
+        "always": "",
+        "x": 680,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "0c7e1d353077d677",
+        "type": "e-mail",
+        "z": "fddb6381c9a394b4",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "dcc.ptit@gmail.com",
+        "dname": "Gửi Mail thông báo",
+        "x": 970,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e0f150c967d3e658",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d5145dc45c694a1a",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "bf4e29e5c1126add",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "1d40fb0e9996dfa6",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "b009e3caab098d90",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "f4397211aa82149c",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 8,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "dedcbb537bd51e78",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 9,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "3e3df2ba786a97d1",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 11,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "8ef7ea9faf969d9a",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 12,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "0d6e49ce7d891de0",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 13,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "0f11dcec2501cb90",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 14,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "44a9a44d7c05ef66",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 15,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "b93d8f2ab825fbb8",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 16,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "958c8592c7351305",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 17,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "4a40620bea14eb62",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 20,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "c9f6fecf172de285",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 21,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "76357d4d3f87ee13",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 22,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "1a1b50945e0b5402",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 24,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "53d9df2efc4ca0f7",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 25,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "3a7ffd4eaa21780e",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 26,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "132cec2a37d36ef5",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 27,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "3af27b97ce1b82de",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 28,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "a2d9be93ac379553",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "cf068d0bbf0ea0ae",
+        "order": 30,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "6fe4695700d60579",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "59b5b299dfcdfba3",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "fe2d5e29113582b3",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "a5010f538ff764ea",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "ebe77a619c3524d0",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "62467d16be8986f5",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "7a564b212ffd68d6",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 8,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "643b2950940256a2",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 9,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "6ce9f363a4ba951a",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 10,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "df4f571edb7be8a0",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 11,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "073a2012a369b8c5",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 12,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "10998e7b8ed4f117",
+        "type": "ui_spacer",
+        "z": "fddb6381c9a394b4",
+        "name": "spacer",
+        "group": "7eba60b3f97ca446",
+        "order": 15,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "592d3a4c077eb0c6",
+        "type": "mqtt-broker",
+        "name": "BTL",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "7eba60b3f97ca446",
+        "type": "ui_group",
+        "name": "Cảnh báo khí GAS",
+        "tab": "e46919eba21f531e",
+        "order": 1,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "cf068d0bbf0ea0ae",
+        "type": "ui_group",
+        "name": " Điều Khiển Đèn",
+        "tab": "cbe185edc4e88010",
+        "order": 1,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d651a65f.c0a2d",
+        "type": "mqtt-broker",
+        "name": "BTL",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e46919eba21f531e",
+        "type": "ui_tab",
+        "name": "Cảnh Báo Cháy",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "cbe185edc4e88010",
+        "type": "ui_tab",
+        "name": " Điều Khiển Thiết Bị",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
